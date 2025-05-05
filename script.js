@@ -244,7 +244,7 @@ limitPopup.className = 'welcome-popup';
 limitPopup.innerHTML = `
     <div class="popup-content">
         <h3>Daily Limit Reached</h3>
-        <p>You've viewed your 3 daily quotes. Come back in <span id="countdown">24 hours</span> for more!</p>
+        <p>You've viewed your daily quotes limit. Come back in <span id="countdown">24 hours</span> for more!</p>
         <button id="closeLimitPopup">Okay</button>
     </div>
 `;
@@ -302,13 +302,14 @@ function resetDailyLimits() {
 // Get a non-repeating random quote
 function getRandomQuote() {
     const availableQuotes = quotes.filter(quote => 
-        !state.viewedQuotes.includes(quote.text)
+        !state.viewedQuotes.includes(quote.text) && quote.text.trim() !== ""
     );
     
     if (availableQuotes.length === 0) {
         // If all quotes have been shown, reset the viewed list
         state.viewedQuotes = [];
-        return quotes[Math.floor(Math.random() * quotes.length)];
+        const nonEmptyQuotes = quotes.filter(quote => quote.text.trim() !== "");
+        return nonEmptyQuotes[Math.floor(Math.random() * nonEmptyQuotes.length)];
     }
     
     return availableQuotes[Math.floor(Math.random() * availableQuotes.length)];
@@ -343,8 +344,8 @@ function showLimitPopup() {
 
 // Display quote with fade animation
 function displayQuote() {
-    // Check daily limit
-    if (state.quoteCount >= 3) {
+    // Check daily limit - updated to 5
+    if (state.quoteCount >= 5) {
         showLimitPopup();
         return;
     }
