@@ -279,6 +279,14 @@ function saveState() {
     localStorage.setItem('quoteState', JSON.stringify(state));
 }
 
+// Check if this is the user's first visit
+function checkFirstVisit() {
+    const hasVisited = localStorage.getItem('visited');
+    if (!hasVisited) {
+        elements.welcomePopup.classList.add('show');
+    }
+}
+
 function resetDailyLimits() {
     state.viewedQuotes = [];
     state.quoteCount = 0;
@@ -366,7 +374,8 @@ function displayQuote() {
 // Event Listeners
 elements.flipBtn?.addEventListener('click', displayQuote);
 elements.closePopup?.addEventListener('click', () => {
-   elements.welcomePopup.classList.remove('show');   localStorage.setItem('visited', 'true');
+    elements.welcomePopup.classList.remove('show');
+    localStorage.setItem('visited', 'true');
 });
 
 document.getElementById('closeLimitPopup')?.addEventListener('click', () => {
