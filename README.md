@@ -1,5 +1,5 @@
 Quotes of the Unsaid - Random Quote Generator
-Project Screenshot [Add your own screenshot]
+Project Screenshot 
 
 A beautiful, responsive quote generator that displays random quotes with elegant animations. Features a daily limit to encourage thoughtful reflection rather than mindless clicking.
 
